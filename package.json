@@ -1,0 +1,28 @@
+{
+  "name": "@mandrews6975/nav-urls",
+  "version": "1.0.0",
+  "description": "A Node.js package capable of generating navigation URLs for various map platforms such as Google Maps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mandrews6975/Nav-URLs.git"
+  },
+  "keywords": [
+    "maps",
+    "navigation",
+    "url",
+    "generation",
+    "directions",
+    "optimization",
+    "routes"
+  ],
+  "author": "Michael Andrews",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mandrews6975/Nav-URLs/issues"
+  },
+  "homepage": "https://github.com/mandrews6975/Nav-URLs#readme"
+}
