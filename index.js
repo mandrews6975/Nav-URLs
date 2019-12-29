@@ -51,9 +51,9 @@ exports.routeNav = (locations, options) => {
   }else if(options.platform = 'bing'){
     url += 'https://bing.com/maps/default.aspx?';
     url += 'rtp=';
-    for(let i = 0; i < locations.length - 1; i++){
-      url += 'addr.' + locations[i];
-      if(i < locations.length - 2){
+    for(let i = 0; i < locations.length; i++){
+      url += 'addr.' + escape(locations[i]);
+      if(i < locations.length - 1){
         url += '~';
       }
     }
