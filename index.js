@@ -49,7 +49,29 @@ exports.routeNav = (locations, options) => {
     }
     return url;
   }else if(options.platform = 'bing'){
-
+    url += 'https://bing.com/maps/default.aspx?';
+    url += 'rtp=';
+    for(let i = 0; i < locations.length - 1; i++){
+      url += 'addr.' + locations[i];
+      if(i < locations.length - 2){
+        url += '~';
+      }
+    }
+    if(options.travelmode != null){
+      if(options.travelmode == 'driving'){
+        url += '&mode=D';
+      }else if(options.travelmode == 'walking'){
+        url += '&mode=W';
+      }else if(options.travelmode == 'transit'){
+        url += '&mode=T';
+      }else{
+        console.log('Invalid travelmode for Bing Maps: ' + options.travelmode);
+        return;
+      }
+    }else{
+      url += '&mode=D';
+    }
+    return url;
   }else{
     console.log('Invalid platform specification: ' + options.plaform);
     return;
