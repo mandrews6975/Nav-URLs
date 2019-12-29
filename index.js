@@ -73,11 +73,28 @@ exports.routeNav = (locations, options) => {
     }
     return url;
   }else{
-    console.log('Invalid platform specification: ' + options.plaform);
+    console.log('Invalid platform specification: ' + options.platform);
     return;
   }
 }
 
 exports.routeNavOpt = (locations, key, options) => {
-
+  let http = new XMLHttpRequest();
+  let urlGET = 'http://www.mapquestapi.com/directions/v2/optimizedroute?key=' + key;
+  let payload = {locations: locations};
+  payload = JSON.stringify(payload);
+  urlGET += payload;
+  http.open('GET', urlGET, false);
+  http.send();
+  res = JSON.parse(http.responsetext);
+  let optLocOrder = res.route.locationsequence;
+  let optLocations = [];
+  for(let i = 0; i < locations.length; i++){
+    optLocations.push(locations[optLocOrder[i]]);
+  }
+  if(options.platform == 'apple'){
+    console.log('Invalid platform specification: ' + options.platform);
+    return;
+  }
+  return routeNav(optLocations, options);
 }
