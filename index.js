@@ -1,24 +1,28 @@
-exports.routeNav = (locations, options) => {
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+
+function routeNav(locations, options){
   let url = '';
   if(locations.length < 2){
     console.log('Invalid locations array: ' + locations.toString());
+    return;
   }
-  if(options.platform = 'google'){
+  if(options.platform == 'google'){
     url += 'https://www.google.com/maps/dir/?api=1';
     url += '&origin=' + escape(locations[0]);
     url += '&destination=' + escape(locations[locations.length - 1]);
     if(options.travelmode != null){
-      if(options.travelmode != 'driving' || options.travelmode != 'walking' || options.travelmode != 'bicycling' || options.travelmode != 'transit'){
+      if(options.travelmode == 'driving' || options.travelmode == 'walking' || options.travelmode == 'transit' || options.travelmode == 'bicycling'){
+        url += '&travelmode=' + options.travelmode;
+      }else{
         console.log('Invalid travelmode for Google Maps: ' + options.travelmode);
         return;
       }
-      url += '&travelmode=' + options.travelmode;
     }else{
       url += '&travelmode=driving';
     }
     if(locations.length > 2){
       url += '&waypoints=';
-      for(let i = 1; i < locations.length - 2){
+      for(let i = 1; i < locations.length - 1; i++){
         url += escape(locations[i]);
         if(i < locations.length - 2){
           url += '%7C';
@@ -26,10 +30,10 @@ exports.routeNav = (locations, options) => {
       }
     }
     return url;
-  }else if(options.platform = 'apple'){
+  }else if(options.platform == 'apple'){
     url += 'http://maps.apple.com/?';
-    url += 'saddr=' + escape(locations[0]);
-    url += 'daddr=' + escape(locations[locations.length - 1]);
+    url += 'saddr=' + locations[0].replace(',', '').replace(' ', '+');
+    url += '&daddr=' + locations[locations.length - 1].replace(',', '').replace(' ', '+');
     if(options.travelmode != null){
       if(options.travelmode == 'driving'){
         url += '&dirflg=d';
@@ -48,11 +52,11 @@ exports.routeNav = (locations, options) => {
       console.log('Intermediate waypoints not supported by Apple Maps. Returned URL contains first and final locations only.')
     }
     return url;
-  }else if(options.platform = 'bing'){
+  }else if(options.platform == 'bing'){
     url += 'https://bing.com/maps/default.aspx?';
     url += 'rtp=';
     for(let i = 0; i < locations.length; i++){
-      url += 'addr.' + escape(locations[i]);
+      url += 'adr.' + locations[i].replace(' ', '%20');
       if(i < locations.length - 1){
         url += '~';
       }
@@ -78,16 +82,20 @@ exports.routeNav = (locations, options) => {
   }
 }
 
+exports.routeNav = (locations, options) => {
+  return routeNav(locations, options);
+}
+
 exports.routeNavOpt = (locations, key, options) => {
   let http = new XMLHttpRequest();
   let urlGET = 'http://www.mapquestapi.com/directions/v2/optimizedroute?key=' + key;
   let payload = {locations: locations};
   payload = JSON.stringify(payload);
-  urlGET += payload;
+  urlGET += '&json=' + payload;
   http.open('GET', urlGET, false);
   http.send();
-  res = JSON.parse(http.responsetext);
-  let optLocOrder = res.route.locationsequence;
+  res = JSON.parse(http.responseText);
+  let optLocOrder = res.route.locationSequence;
   let optLocations = [];
   for(let i = 0; i < locations.length; i++){
     optLocations.push(locations[optLocOrder[i]]);

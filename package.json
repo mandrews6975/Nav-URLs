@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/mandrews6975/Nav-URLs/issues"
   },
-  "homepage": "https://github.com/mandrews6975/Nav-URLs#readme"
+  "homepage": "https://github.com/mandrews6975/Nav-URLs#readme",
+  "devDependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
 }
