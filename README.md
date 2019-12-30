@@ -8,7 +8,7 @@ Nav-URLs is a Node.js package capable of generating navigation URLs for various 
 There are two functions for generating navigation URLs (raw ordering and optimized):
 
 **`routeNav(locations, options)`**: returns a raw-ordered navigation URL for the specified platform and locations (string)
-* **locations**: array of locations/addresses (strings) written in formats standard map platforms understand (route is ordered from locations[0] to locations[n])
+* **locations**: array of locations/addresses (strings) written in formats standard map platforms understand (route is ordered from `locations[0]` to `locations[n]`)
 * **options**: object containing platform (string) and travelmode (string) (ex. `{platform: 'google', travelmode: 'driving'}`)
   * Property | Possible Values
     ---------|----------------
