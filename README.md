@@ -9,20 +9,20 @@ There are two functions for generating navigation URLs (raw ordering and optimiz
 
 **`routeNav(locations, options)`**: returns a raw-ordered navigation URL for the specified platform and locations (string)
 * **locations**: array of locations/addresses (strings) written in formats standard map platforms understand (route is ordered from locations[0] to locations[n])
-* **options**: object containing platform (string) and travelmode (string) (ex. `{platform: 'google', travelmode: 'driving}`)
+* **options**: object containing platform (string) and travelmode (string) (ex. `{platform: 'google', travelmode: 'driving'}`)
   * Property | Possible Values
     ---------|----------------
     platform | google, apple, bing
     travelmode | driving, walking, transit, bicycling (only supported by Google Maps)
 
 **`routeNavOpt(locations, key, options)`**: returns an optimized navigation URL for the specified platform and locations (string)
-* **locations**: array of locations/addresses (strings) written in formats standard map platforms understand (location order is irrelevant)
+* **locations**: array of locations/addresses (strings) written in formats standard map platforms understand (`locations[0]` is origin, `locations[n]` is destination, `locations[1..n-1]` are waypoints to be optimized)
 * **key**: string that is a MapQuest API request key (register for a free key [here](https://developer.mapquest.com/))
-* **options**: object containing platform (string) and travelmode (string) (ex. `{platform: 'google', travelmode: 'driving}`)
+* **options**: object containing platform (string) and travelmode (string) (ex. `{platform: 'google', travelmode: 'driving'}`)
   * Property | Possible Values
     ---------|----------------
     platform | google, bing
-    travelmode | driving, walking, transit, bicycling (only supported by Google Maps)
+    travelmode | driving, walking, transit, bicycling (bicycling only supported by Google Maps)
 
 ## Notes
 Apple Maps does not support intermediate waypoints; therefore, if an array of more than two locations is supplied to `routeNav(locations, options)`, only the first and final location will be used in the generated route URL.
