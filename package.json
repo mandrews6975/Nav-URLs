@@ -1,6 +1,6 @@
 {
   "name": "@mandrews6975/nav-urls",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Node.js package capable of generating navigation URLs for various map platforms such as Google Maps.",
   "main": "index.js",
   "scripts": {
