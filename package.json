@@ -1,10 +1,10 @@
 {
   "name": "@mandrews6975/nav-urls",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Generate navigation URLs for various map platforms such as Google Maps.",
-  "main": "index.js",
+  "main": "functions.js",
   "scripts": {
-    "test": "start"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
     "url": "https://github.com/mandrews6975/Nav-URLs/issues"
   },
   "homepage": "https://github.com/mandrews6975/Nav-URLs#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
+    "node-fetch": "^2.6.1",
     "xmlhttprequest": "^1.8.0"
   }
 }
